@@ -20,6 +20,12 @@
             "text_style": "subtitle"
           }
         },
+        "sku": {
+          "type": "sku",
+          "settings": {
+            "text_style": "body"
+          }
+        },
         "price": {
           "type": "price"
         },
@@ -89,6 +95,7 @@
         "vendor",
         "title",
         "caption",
+        "sku",
         "price",
         "variant_picker",
         "quantity_selector",
