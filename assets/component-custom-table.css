@@ -1,3 +1,4 @@
+/* Custom Table for add to cart form */
 .custom-table {
   border-collapse: collapse;
   width: 100%;
@@ -19,4 +20,20 @@
   border: 1px solid #ccc;
   border-radius: 4px;
   width: 70px;
+}
+
+/* Custom Table for Dimensions */
+.custom-table-2 {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.custom-table-2 th,
+.custom-table-2 td {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+.custom-table-2 th {
+  text-align: left;
 }
