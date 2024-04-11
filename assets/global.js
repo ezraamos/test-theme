@@ -189,14 +189,14 @@ class QuantityInput extends HTMLElement {
         this.input.value = this.input.dataset.min;
       } else {
         this.input.stepUp()
-      } 
+      }
     } else {
       this.input.stepDown();
     }
-    
+
     if (previousValue !== this.input.value) this.input.dispatchEvent(this.changeEvent);
 
-    if ((this.input.dataset.min === previousValue) &&  event.target.name === 'minus') {
+    if ((this.input.dataset.min === previousValue) && event.target.name === 'minus') {
       this.input.value = parseInt(this.input.min);
     }
   }
@@ -1118,14 +1118,14 @@ class VariantSelects extends HTMLElement {
     const refreshSourceData = () => {
       const mediaGallerySourceItems = Array.from(mediaGallerySource.querySelectorAll('li[data-media-id]'));
       const sourceSet = new Set(mediaGallerySourceItems.map(item => item.dataset.mediaId));
-      const sourceMap = new Map(mediaGallerySourceItems.map((item, index) => [item.dataset.mediaId, {item, index}]));
+      const sourceMap = new Map(mediaGallerySourceItems.map((item, index) => [item.dataset.mediaId, { item, index }]));
       return [mediaGallerySourceItems, sourceSet, sourceMap];
     };
 
     if (mediaGallerySource && mediaGalleryDestination) {
       let [mediaGallerySourceItems, sourceSet, sourceMap] = refreshSourceData();
       const mediaGalleryDestinationItems = Array.from(mediaGalleryDestination.querySelectorAll('li[data-media-id]'));
-      const destinationSet = new Set(mediaGalleryDestinationItems.map(({dataset}) => dataset.mediaId));
+      const destinationSet = new Set(mediaGalleryDestinationItems.map(({ dataset }) => dataset.mediaId));
       let shouldRefresh = false;
 
       // add items from new data not present in DOM
@@ -1240,6 +1240,32 @@ class VariantSelects extends HTMLElement {
           addButtonUpdated ? addButtonUpdated.hasAttribute('disabled') : true,
           window.variantStrings.soldOut
         );
+
+        // Update size information
+        const sizeDestination = document.getElementById(`Size-${sectionId}`);
+        const sizeSource = html.getElementById(`Size-${sectionId}`);
+        if (sizeSource && sizeDestination) {
+          sizeDestination.textContent = sizeSource.textContent;
+        }
+
+        // Update dimensions information
+        const heightDestination = document.getElementById(`Height-${sectionId}`);
+        const widthDestination = document.getElementById(`Width-${sectionId}`);
+        const depthDestination = document.getElementById(`Depth-${sectionId}`);
+
+        const heightSource = html.getElementById(`Height-${sectionId}`);
+        const widthSource = html.getElementById(`Width-${sectionId}`);
+        const depthSource = html.getElementById(`Depth-${sectionId}`);
+
+        if (heightSource && heightDestination) {
+          heightDestination.textContent = heightSource.textContent;
+        }
+        if (widthSource && widthDestination) {
+          widthDestination.textContent = widthSource.textContent;
+        }
+        if (depthSource && depthDestination) {
+          depthDestination.textContent = depthSource.textContent;
+        }
 
         publish(PUB_SUB_EVENTS.variantChange, {
           data: {
