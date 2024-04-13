@@ -1,0 +1,115 @@
+{{ 'component-news-carousel.css' | asset_url | stylesheet_tag: preload: true }}
+
+<!-- Add the slick-theme.css if you want default styling -->
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css">
+<!-- Add the slick-theme.css if you want default styling -->
+
+<link rel="stylesheet" type="text/css" href="http://kenwheeler.github.io/slick/slick/slick-theme.css">
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
+<section>
+  <ul class="news-carousel">
+    {% for block in section.blocks %}
+      {% if block.settings.featured == true %}
+        <li class=" block {% if block.type == 'campaign' %}campaign{% elsif block.type == 'new-product' %}new-product{% else %}news{% endif %}">
+          <h2 class="title">{{ block.settings.title }}</h2>
+          <p>{{ block.settings.description }}</p>
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% for block in section.blocks %}
+      {% if block.settings.featured == false %}
+        <li class="block {% if block.type == 'campaign' %}campaign{% elsif block.type == 'new-product' %}new-product{% else %}news{% endif %}">
+          <h2 class="title">{{ block.settings.title }}</h2>
+          <p>{{ block.settings.description }}</p>
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</section>
+
+<script>
+  $('.news-carousel').slick({
+    infinite: false,
+    speed: 1000,
+    dots: true,
+    slidesToShow: 3,
+    slidesToScroll: 3,
+    prevArrow: '<button class="slide-arrow prev-arrow"></button>',
+    nextArrow: '<button class="slide-arrow next-arrow"></button>',
+  });
+</script>
+
+{% schema %}
+{
+  "name": "News Carousel",
+  "presets": [{ "name": "news carousel" }],
+  "tag": "section",
+  "limit": 1,
+  "blocks": [
+    {
+      "type": "campaign",
+      "name": "Campaign",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured"
+        }
+      ]
+    },
+    {
+      "type": "new-product",
+      "name": "New Product",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured"
+        }
+      ]
+    },
+    {
+      "type": "news",
+      "name": "News",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
